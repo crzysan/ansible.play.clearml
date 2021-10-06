@@ -1,0 +1,38 @@
+---
+## Install python
+- name: install python on Red Hat and family
+  yum:
+    name: python38
+    state: latest
+  when: ansible_facts['os_family'] == "RedHat"
+- name: install python on Ubuntu and family
+  apt:
+    name: python
+    state: latest
+  when: ansible_facts['os_family'] == "Debian"
+
+## Install clearml-agent package with pip
+- name: install clearml-agent
+  pip:
+    name: "{{ app_name }}"
+    
+## Create config file 
+- name: configure clearml-agent
+  template:
+    src: clearml.conf.j2
+    dest: ~/clearml.conf
+    owner: root
+    group: root
+    mode: 0644
+
+## Create service file adn start clearml-agent
+- name: Create service file for clearml-agent
+  template:
+    src: "{{ clearml_service }}.service.j2"
+    dest: "/lib/systemd/system/{{ clearml_service }}.service"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd
+    - restart clearml

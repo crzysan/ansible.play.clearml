@@ -1,0 +1,14 @@
+---
+# defaults file for clearml
+
+app_name: clearml-agent
+clearml_user: root
+clearml_service: "{{ app_name }}"
+
+clearml_web_server: https://app.community.clear.ml
+clearml_api_server: https://api.community.clear.ml
+clearml_files_server: https://files.community.clear.ml
+clearml_access_key: 6N3AB11B5USMPZ2EWLF7
+clearml_secret_key: f4rGydWuNhgzUduhyOWlVafkptpuC7kq8NkoID6RoXp7W8Vwih
+
+clearml_agent_gpu: 0

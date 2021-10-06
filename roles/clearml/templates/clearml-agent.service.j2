@@ -1,0 +1,17 @@
+[Unit]
+Description=ClearML agent service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/clearml-agent daemon --queue default --gpus {{ clearml_agent_gpu }} --detached
+ExecStop=/usr/local/bin/clearml-agent daemon --queue default --stop
+RemainAfterExit=true
+User={{ clearml_user }}
+Restart=on-failure
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
+
