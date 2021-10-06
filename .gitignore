@@ -1,4 +1,4 @@
-roles/*
+roles/clearml
 local-configure.yml
 .vagrant/
 docs/_build/
