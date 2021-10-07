@@ -1,3 +1,9 @@
 ---
 # tasks file for clearml
-- include: install.yml
+- name: Install the correct web server for RHEL
+  import_tasks: install_redhat.yml
+  when: ansible_facts['os_family']|lower == 'redhat'
+
+- name: Install the correct web server for Debian
+  import_tasks: install_debian.yml
+  when: ansible_facts['os_family']|lower == 'debian'
