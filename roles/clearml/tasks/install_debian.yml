@@ -1,0 +1,40 @@
+---
+## Install python
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+
+- name: install python on Ubuntu and family
+  apt:
+    pkg: 
+      - python3
+      - python3-pip
+    state: latest
+
+
+## Install clearml-agent package with pip
+- name: install clearml-agent
+  pip:
+    name: "{{ app_name }}"
+    
+## Create config file 
+- name: configure clearml-agent
+  template:
+    src: clearml.conf.j2
+    dest: ~/clearml.conf
+    owner: "{{ clearml_user }}"
+    group: "{{ clearml_user }}"
+    mode: 0644
+
+## Create service file adn start clearml-agent
+- name: Create service file for clearml-agent
+  template:
+    src: "{{ clearml_service }}.service.j2"
+    dest: "/lib/systemd/system/{{ clearml_service }}.service"
+    owner: "{{ clearml_user }}"
+    group: "{{ clearml_user }}"
+    mode: 0644
+  notify:
+    - reload systemd
+    - restart clearml
