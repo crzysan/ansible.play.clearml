@@ -1,0 +1,14 @@
+---
+# Note: generate pass using: python3 -c 'import bcrypt,base64; print(base64.b64encode(bcrypt.hashpw("password1".encode(), bcrypt.gensalt())))'
+users:
+  - username: saram
+    pass: JDJiJDEyJGdZaWhoaUtOdVlVeVdhcjVTcWxJOS5nWGNXOXk5VnpNMEg5dXVPWktzVDFUMzFHa0ZWMjNP
+    fullname: "Sara Macoy"
+
+  - username: jackyl
+    pass: JDJiJDEyJGdZaWhoaUtOdVlVeVdhcjVTcWxJOS5nWGNXOXk5VnpNMEg5dXVPWktzVDFUMzFHa0ZWMjNP
+    fullname: "Jacky Li"
+
+  - username: medinaj
+    pass: JDJiJDEyJGdZaWhoaUtOdVlVeVdhcjVTcWxJOS5nWGNXOXk5VnpNMEg5dXVPWktzVDFUMzFHa0ZWMjNP
+    fullname: "Medina Jackson"

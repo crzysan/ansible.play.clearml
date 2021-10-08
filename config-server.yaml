@@ -1,5 +1,7 @@
 ---
 - name: Installing clearML agent
   hosts: agent2
+  vars_files: 
+    - ./users.yml
   roles:
     - clearml-server 

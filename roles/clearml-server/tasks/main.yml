@@ -1,6 +1,13 @@
 ---
 # tasks file for clearml-server
 
+# install nginx and configure SSL
 - name: Install the correct web server for Debian
   import_tasks: install_nginx.yml
   when: ansible_facts['os_family']|lower == 'debian'
+
+# configure authentication
+- name: Configure authentication for clearml server on Debian
+  import_tasks: config_server.yml
+  when: ansible_facts['os_family']|lower == 'debian'
+

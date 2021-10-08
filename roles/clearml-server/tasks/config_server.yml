@@ -1,0 +1,19 @@
+---
+
+## Create iuser in config file
+- name: configure authentication and create users
+  template:
+    src: apiserver.conf.j2
+    dest: /opt/clearml/config/apiserver.conf
+    owner: "{{ clearml_user }}"
+    group: "{{ clearml_user }}"
+    mode: 0644
+  register: clearmlconfig
+
+## Restart clearml when config is updated
+- name: Restart nginx when config change is true
+  command: |
+    docker-compose -f /opt/clearml/docker-compose.yml down
+    docker-compose -f /opt/clearml/docker-compose.yml up -d
+  when: clearmlconfig.changed
+

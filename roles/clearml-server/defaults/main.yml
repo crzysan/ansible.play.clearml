@@ -1,2 +1,17 @@
 ---
 # defaults file for clearml-server
+
+clearml_user: root
+
+nginx_user: root
+openssl_certificate: /etc/ssl/certs/nginx-selfsigned.crt
+openssl_certificate_key: /etc/ssl/private/nginx-selfsigned.key
+openssl_country: BE
+openssl_state: Antwerp
+openssl_loc: Antwerp
+openssl_org: Ovizio
+openssl_cn: example.local
+openssl_subject: "/C={{ openssl_country }}/ST={{ openssl_state }}/L={{ openssl_loc }}/O={{ openssl_org }}/CN={{ openssl_cn }}"
+your_domain: "{{ openssl_cn }}"
+nginx_access_log: /var/log/nginx/clearml.access.log
+
