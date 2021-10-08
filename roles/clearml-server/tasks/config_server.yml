@@ -4,7 +4,7 @@
 - name: configure authentication and create users
   template:
     src: apiserver.conf.j2
-    dest: /opt/clearml/config/apiserver.conf
+    dest: /opt/clearml/apiserver/config/apiserver.conf
     owner: "{{ clearml_user }}"
     group: "{{ clearml_user }}"
     mode: 0644
