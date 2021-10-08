@@ -17,8 +17,8 @@
 - name: install clearml-agent
   pip:
     name: "{{ app_name }}"
-    
-## Create config file 
+
+## Create config file
 - name: configure clearml-agent
   template:
     src: clearml.conf.j2
@@ -26,6 +26,7 @@
     owner: "{{ clearml_user }}"
     group: "{{ clearml_user }}"
     mode: 0644
+  register: clearmlconfig
 
 ## Create service file adn start clearml-agent
 - name: Create service file for clearml-agent
@@ -35,6 +36,15 @@
     owner: "{{ clearml_user }}"
     group: "{{ clearml_user }}"
     mode: 0644
+  register: clearmlservice
+    
+
+## Restart clearml-agent service when config or service update
+- name: Restart clearml-service agent
+  debug:
+    msg: Performing restart!!!
   notify:
     - reload systemd
     - restart clearml
+  when: clearmlconfig.changed or clearmlservice.changed
+

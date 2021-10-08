@@ -5,10 +5,10 @@ app_name: clearml-agent
 clearml_user: root
 clearml_service: "{{ app_name }}"
 
-clearml_web_server: https://app.community.clear.ml
-clearml_api_server: https://api.community.clear.ml
-clearml_files_server: https://files.community.clear.ml
-clearml_access_key: 6N3AB11B5USMPZ2EWLF7
-clearml_secret_key: f4rGydWuNhgzUduhyOWlVafkptpuC7kq8NkoID6RoXp7W8Vwih
+clearml_web_server: http://54.154.27.233:8080
+clearml_api_server: http://54.154.27.233:8008
+clearml_files_server: http://54.154.27.233:8081
+clearml_access_key: 0N40Q5DDV42IB997L9W4
+clearml_secret_key: dpL3PHFRfAdAjOuoEZDBKjiFrjDSyd61AFWy3o2mFVevrat8Cw
 
 clearml_agent_gpu: 0

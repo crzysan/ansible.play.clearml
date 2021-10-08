@@ -1,0 +1,30 @@
+INSTALL NOTES FOR ANSIBLE (CENTOS8)
+===================================
+
+EXAMPLE SCENARIO: 
+you have a control node server to execute ansible scripts
+you have managednode servers which you want to configure
+you created a user for ansible (ex: ansible user)
+
+
+### guide to install ansible on control node
+
+# Install ansible
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+yum install -y ansible
+ansible --version
+
+# Create sshkey and distribute to Control nodes (ansible as user)
+su - ansible
+ssh-keygen
+ssh-copy-id managednode1.example.com
+ssh-copy-id managednode1.example.com
+
+# Configuring sudo for the Ansible User
+echo "ansible ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible
+
+
+### guide to configure managed nodes
+
+# Configuring sudo for the Ansible User
+echo "ansible ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible

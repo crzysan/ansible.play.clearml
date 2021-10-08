@@ -1,8 +1,10 @@
 api {
-  # Christian Candelaria's workspace
+  # Notice: 'host' is the api server (default port 8008), not the web server.
   web_server: {{ clearml_web_server }}
   api_server: {{ clearml_api_server }}
   files_server: {{ clearml_files_server }}
+  # Credentials are generated using the webapp
+  # Override with os environment: CLEARML_API_ACCESS_KEY / CLEARML_API_SECRET_KEY
   credentials {
     "access_key" = "{{ clearml_access_key }}"
     "secret_key" = "{{ clearml_secret_key }}"
