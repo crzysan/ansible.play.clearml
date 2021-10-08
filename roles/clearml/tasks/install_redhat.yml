@@ -5,7 +5,7 @@
     name: "*"
     state: latest
 
-- name: install python on Ubuntu and family
+- name: install python on Redhat and family
   yum:
     name: python38
     state: latest

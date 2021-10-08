@@ -1,0 +1,15 @@
+#localhost
+
+[agents-gpu0]
+agent0
+#agent1
+
+[agents-gpu1]
+agent2
+
+
+[agents-gpu0:vars]
+clearml_agent_gpu = 0
+
+[agents-gpu1:vars]
+clearml_agent_gpu = 1

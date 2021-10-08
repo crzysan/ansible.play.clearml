@@ -1,9 +1,5 @@
 ---
 - name: Installing clearML agent
-  hosts: localhost
-  vars:
-    clearml_agent_gpu: 0
-  tasks:
-  - include_role:
-      name: clearml
-      tasks_from: install
+  hosts: all
+  roles:
+    - clearml 
