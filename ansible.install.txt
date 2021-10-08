@@ -21,10 +21,10 @@ ssh-copy-id managednode1.example.com
 ssh-copy-id managednode1.example.com
 
 # Configuring sudo for the Ansible User
-echo "ansible ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible
+sudo echo "ansible ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible
 
 
 ### guide to configure managed nodes
 
 # Configuring sudo for the Ansible User
-echo "ansible ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible
+sudo echo "ansible ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ansible
