@@ -1,0 +1,23 @@
+---
+# handlers file for clearml-server
+
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: start nginx
+  service:
+    name: nginx.service
+    state: started
+    enabled: yes
+
+- name: stop nginx
+  service:
+    name: nginx.service
+    state: stopped
+
+- name: restart nginx
+  service:
+    name: nginx.service
+    state: restarted
+

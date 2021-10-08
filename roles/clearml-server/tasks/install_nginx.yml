@@ -1,0 +1,43 @@
+---
+## Install nginx
+# SOURCE: 
+# https://giters.com/allegroai/clearml-server/issues/78
+# https://snapcraft.io/docs/installing-snap-on-debian
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+
+- name: install nginx and snapd
+  apt:
+    pkg:
+      - openssl
+      - nginx
+    state: latest
+
+# Create selfsigned cert with openssl
+- name: Create selfsigned certs
+  command: > 
+          openssl req -x509 -nodes -days 365 
+          -newkey rsa:2048 -subj "{{ openssl_subject }}" 
+          -keyout {{ openssl_certificate_key }} 
+          -out {{ openssl_certificate }}
+
+## Create config file
+- name: configure ssl for nginx
+  template:
+    src: deafult.j2
+    dest: /etc/nginx/sites-available/{{ your_domain }};
+    owner: "{{ nginx_user }}"
+    group: "{{ nginx_user }}"
+    mode: 0644
+  register: nginxconfig
+
+## Restart nginx service when config is updated
+- name: Restart nginx when config change is true
+  debug:
+    msg: Nginx restart!!!
+  notify:
+    - reload nginx
+    - restart nginx
+  when: nginxconfig.changed

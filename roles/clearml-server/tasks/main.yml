@@ -1,0 +1,6 @@
+---
+# tasks file for clearml-server
+
+- name: Install the correct web server for Debian
+  import_tasks: install_nginx.yml
+  when: ansible_facts['os_family']|lower == 'debian'
