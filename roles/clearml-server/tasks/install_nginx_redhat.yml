@@ -3,14 +3,10 @@
 # SOURCE: 
 # https://giters.com/allegroai/clearml-server/issues/78
 # https://snapcraft.io/docs/installing-snap-on-debian
-- name: Upgrade all packages to the latest version
-  apt:
-    name: "*"
-    state: latest
 
 - name: install nginx and snapd
-  apt:
-    pkg:
+  yum:
+    name:
       - openssl
       - nginx
     state: latest
@@ -27,7 +23,7 @@
 - name: configure ssl for nginx
   template:
     src: default.j2
-    dest: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-available/{{ your_domain }}
     owner: "{{ nginx_user }}"
     group: "{{ nginx_user }}"
     mode: 0644

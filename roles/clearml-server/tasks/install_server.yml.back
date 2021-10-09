@@ -1,0 +1,51 @@
+---
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+
+- name: Install python on Ubuntu and family
+  apt:
+    pkg:
+      - python3
+      - python3-pip
+    state: latest
+
+- name: Install docker-compose module
+  pip:
+    name: docker-compose
+
+- name: Create directory if they don't exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: 1001
+    group: 1001
+    mode: 0775
+  loop:
+    - /opt/clearml/data/mongo/db
+    - /opt/clearml/data/mongo/configdb
+    - /opt/clearml/data/redis
+    - /opt/clearml/logs
+    - /opt/clearml/config
+    - /opt/clearml/data/fileserver
+
+
+# src directory path starts at the parent playbook directory!!
+- name: Synchronization of src on the control machine to dest on the remote hosts
+  synchronize:
+    src: docker-compose/docker-compose.yml
+    dest: /opt/clearml/docker-compose.yml
+
+- name: Tear down existing services
+  docker_compose:
+    project_src: /opt/clearml
+    state: absent
+
+- name: Create and start services
+  docker_compose:
+    project_src: /opt/clearml
+  register: output
+
+- ansible.builtin.debug:
+    var: output

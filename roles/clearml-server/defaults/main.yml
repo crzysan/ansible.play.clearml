@@ -2,7 +2,7 @@
 # defaults file for clearml-server
 
 clearml_user: root
-
+clearml_service: clearml-server
 nginx_user: root
 openssl_certificate: /etc/ssl/certs/nginx-selfsigned.crt
 openssl_certificate_key: /etc/ssl/private/nginx-selfsigned.key

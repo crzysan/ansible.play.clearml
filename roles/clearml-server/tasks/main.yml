@@ -6,8 +6,13 @@
   import_tasks: install_nginx.yml
   when: ansible_facts['os_family']|lower == 'debian'
 
-# configure authentication
-- name: Configure authentication for clearml server on Debian
-  import_tasks: config_server.yml
+- name: Install docker for ubuntu
+  import_tasks: install_docker.yml
   when: ansible_facts['os_family']|lower == 'debian'
 
+- name: Install server
+  import_tasks: install_server.yml
+
+# configure authentication
+- name: Configure authentication for clearml server
+  import_tasks: config_server.yml

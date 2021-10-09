@@ -44,7 +44,7 @@
   debug:
     msg: Performing restart!!!
   notify:
-    - reload systemd
+    - reload service
     - restart clearml
   when: clearmlconfig.changed or clearmlservice.changed
 

@@ -1,23 +1,28 @@
 ---
-# handlers file for clearml-server
+# handlers file for clearml
 
 - name: reload systemd
   systemd:
     daemon_reload: yes
 
-- name: start nginx
+- name: reload service
   service:
-    name: nginx.service
+    name: "{{ clearml_service }}.service"
+    state: reloaded
+
+
+- name: start clearml
+  service:
+    name: "{{ clearml_service }}.service"
     state: started
     enabled: yes
 
-- name: stop nginx
+- name: stop clearml
   service:
-    name: nginx.service
+    name: "{{ clearml_service }}.service"
     state: stopped
 
-- name: restart nginx
+- name: restart clearml
   service:
-    name: nginx.service
+    name: "{{ clearml_service }}.service"
     state: restarted
-

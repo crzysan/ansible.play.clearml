@@ -5,6 +5,12 @@
   systemd:
     daemon_reload: yes
 
+- name: reload service
+  service:
+    name: "{{ clearml_service }}.service"
+    state: reloaded
+
+
 - name: start clearml
   service:
     name: "{{ clearml_service }}.service"

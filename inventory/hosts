@@ -1,0 +1,34 @@
+#localhost
+
+[clearml-servers]
+server0
+
+# Agent server list with 0 GPU usage
+[agents-gpu0]
+agent1
+
+# Agent server lust with 1 FPU usage
+[agents-gpu1]
+agent2
+
+[agents-gpu2]
+# add hostname of agents with 2 gpu usage
+
+[agents-gpu3]
+# add hostname of agents with 3 gpu usage
+
+[agents-gpu4]
+# add hostname of agents with 4 gpu usage
+
+[agents-gpu5]
+# add hostname of agents with 5 gpu usage
+
+
+# all clearml agents
+[clearml-agents:children]
+agents-gpu0
+agents-gpu1
+agents-gpu2
+agents-gpu3
+agents-gpu4
+agents-gpu5

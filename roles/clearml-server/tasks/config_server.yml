@@ -1,19 +1,39 @@
 ---
 
+- name: create directory if they don't exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: 1001
+    group: 1001
+    mode: 0775
+  loop:
+    - /opt/clearml/data/mongo/db
+    - /opt/clearml/data/mongo/configdb
+    - /opt/clearml/data/redis
+    - /opt/clearml/logs
+    - /opt/clearml/config
+    - /opt/clearml/data/fileserver
+
 ## Create iuser in config file
 - name: configure authentication and create users
   template:
     src: apiserver.conf.j2
-    dest: /opt/clearml/apiserver/config/apiserver.conf
+    dest: /opt/clearml/config/apiserver.conf
     owner: "{{ clearml_user }}"
     group: "{{ clearml_user }}"
     mode: 0644
   register: clearmlconfig
 
 ## Restart clearml when config is updated
-- name: Restart nginx when config change is true
-  command: |
-    docker-compose -f /opt/clearml/docker-compose.yml down
-    docker-compose -f /opt/clearml/docker-compose.yml up -d
+- name: Restart services
+  docker_compose:
+    project_src: /opt/clearml
+    build: no
+    restarted: yes
   when: clearmlconfig.changed
+  register: output
+
+- debug:
+    var: output
 

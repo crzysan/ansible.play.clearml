@@ -79,18 +79,17 @@
         }
 
         # A list of fixed users
-        # Note: password may be bcrypt-hashed (generate using `python -c 'import bcrypt; print(bcrypt.hashpw("password", bcrypt.gens
-alt()))'`)
+        # Note: password may be bcrypt-hashed (generate using `python -c 'import bcrypt; print(bcrypt.hashpw("password", bcrypt.gensalt()))'`)
         fixed_users {
             enabled: true
-            pass_hashed: false
+            pass_hashed: true
             users: [
 {% for user in users %}
                 {
                     username: "{{ user.username }}"
                     password: "{{ user.pass }}"
                     name: "{{ user.fullname }}"
-                }
+                },
 {% endfor %}
             ]
         }
