@@ -1,16 +1,19 @@
-# ansible.play.clearml
+# Deploy Clearml server and agent on AWS
+
+This playbook will create aws resources that will be used 
+
 
 ## prerequisites
 
-You need to install the following packages.
-
-yum install ansible wget -y
+You need to have ansible installed and configured on your machine.
 
 ## vault
 
 In inventory/group_vars/all/vault.yml you need to add the following variables.
-To get public_key copy content of .ssh/id_rsa.pub
-To get aws access key: https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html
+- To get public_key copy content of .ssh/id_rsa.pub
+- To get aws access key: https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html
+- clearml keys will be created after clearml server has been deployed or use the user username and pass (unencrypted)
+- clearml users must be manually added however pass must be encrypted in the file
 ```yaml
 ---
 public_key: "ssh-rsa XXXXXXXXXXXXXXXXXXX"
@@ -29,7 +32,7 @@ clearml_users:
     fullname: "Medina Jackson"
 
 clearml_access_key: saram
-clearml_secret_key: sarampass
+clearml_secret_key: pass123
 
 ```
 Note: to generate bcrypt clearml user password use python command
