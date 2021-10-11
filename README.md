@@ -3,11 +3,11 @@
 This playbook will create aws resources that will be used to deploy clearml server and agents
 
 
-## prerequisites
+## Prereq
 
 You need to have ansible installed and configured on your machine.
 
-## vault
+## Ansible
 
 In inventory/group_vars/all/vault.yml you need to add the following variables.
 - To get public_key copy content of .ssh/id_rsa.pub
