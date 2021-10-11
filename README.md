@@ -51,5 +51,10 @@ ansible-vault encrypt inventory/group_vars/all/vault.yml
 After this you can run your playbook as follows.
 
 ```bash
-ansible-playbook install.yml --key-file /path/to/private/key/id_rsa
+ansible-playbook playbooks/create-aws-instances.yml
+ansible-playbook playbooks/install-server.yaml
+ansible-playbook playbooks/install-agent.yaml
 ```
+Note: 
+Update variable aws_instance_state to present in inventory/group_vars/all/all.yml to create resources
+If you want to destroy your resources in aws update variable aws_instance_state to absent     
