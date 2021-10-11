@@ -29,7 +29,7 @@ clearml_users:
     fullname: "Medina Jackson"
 
 clearml_access_key: saram
-clearml_secret_key: XXXXXXXXXXXXXXXXXXXX
+clearml_secret_key: sarampass
 
 ```
 Note: to generate bcrypt clearml user password use python command
