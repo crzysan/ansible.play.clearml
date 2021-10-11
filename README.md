@@ -9,11 +9,11 @@ yum install ansible wget -y
 ## vault
 
 In inventory/group_vars/all/vault.yml you need to add the following variables.
-
-
+To get public_key copy content of .ssh/id_rsa.pub
+To get aws access key: https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html
 ```yaml
 ---
-public_key: ""
+public_key: "ssh-rsa XXXXXXXXXXXXXXXXXXX"
 aws_access_key_id: "AXXXXXXXXXXXXXXXXX"
 aws_secret_access_key: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
