@@ -1,7 +1,6 @@
 # Deploy Clearml server and agent on AWS
 
-This is a fully automated playbook  
-It will create aws resources which will be used to deploy clearml server and agents
+This playbook uses terraform to deploy aws resources
 
 
 ## Prereq
