@@ -1,5 +1,5 @@
 ---
-- name: Installing clearML agent
-  hosts: clearml-servers
+- name: Installing clearML server
+  hosts: clearml_servers
   roles:
     - clearml-server 

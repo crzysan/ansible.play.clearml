@@ -1,9 +1,10 @@
 ---
 ## Install python
-- name: Upgrade all packages to the latest version
+- name: Update all packages to their latest version on Redhat and family
   apt:
-    name: "*"
-    state: latest
+    update_cache: yes
+    upgrade: dist
+  when: ansible_facts['os_family']|lower == 'debian'
 
 - name: install python on Ubuntu and family
   apt:
@@ -11,6 +12,20 @@
       - python3
       - python3-pip
     state: latest
+  when: ansible_facts['os_family']|lower == 'debian'
+
+## Install python
+- name: Upgrade all packages to the latest version on Redhat and family
+  yum:
+    name: "*"
+    state: latest
+  when: ansible_facts['os_family']|lower == 'redhat'
+
+- name: install python on Redhat and family
+  yum:
+    name: python38
+    state: latest
+  when: ansible_facts['os_family']|lower == 'redhat'
 
 
 ## Install clearml-agent package with pip
@@ -37,7 +52,13 @@
     group: "{{ clearml_user }}"
     mode: 0644
   register: clearmlservice
-    
+
+- name: Make sure service is started and enabled
+  systemd:
+    name: clearml-agent
+    state: started
+    enabled: yes
+
 
 ## Restart clearml-agent service when config or service update
 - name: Restart clearml-service agent
@@ -45,6 +66,5 @@
     msg: Performing restart!!!
   notify:
     - reload service
-    - restart clearml
-  when: clearmlconfig.changed or clearmlservice.changed
+    - restart service
 

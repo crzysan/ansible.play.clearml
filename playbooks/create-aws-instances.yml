@@ -1,0 +1,8 @@
+---
+- name: Create aws resources
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - clearml-terraform
+

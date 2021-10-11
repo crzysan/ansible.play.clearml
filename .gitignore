@@ -17,3 +17,42 @@ tests.out
 vbox_host.cfg
 .DS_Store
 *.py[co]
+
+##############
+# vault      #
+##############
+/inventory/group_vars/all/vault.yml
+/pass
+/.vault-pass
+
+##############
+# inventory  #
+##############
+/inventory/group_vars/clearml_servers
+/inventory/group_vars/clearml_agents
+/inventory/hosts
+
+##############
+# terraform  #
+##############
+/terraform/.terraform
+/terraform/terraform.tfvars
+/terraform/terraform.tfstate
+/terraform/terraform.tfstate.backup
+
+###############
+# visual code #
+###############
+*.code-workspace
+
+###################
+# no .retry files #
+###################
+*.retry
+
+#########################
+# linux .directroy maps #
+#########################
+.directory
+.DS_Store
+

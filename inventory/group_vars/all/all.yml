@@ -1,0 +1,34 @@
+---
+
+
+
+#########
+# AWS
+#########
+
+hypervisor: aws # https://752625201053.signin.aws.amazon.com/console
+remote_user:
+  aws: ubuntu #ubuntu #ec2-user #centos
+
+aws_ami_id: "ami-0a8e758f5e873d1c1" # Ubuntu Server 20.04 x86_64
+# aws_ami_id: "ami-004d919a2fd446fca" # CentOS 8.2.2004 x86_64
+
+aws_region: "eu-west-1"
+aws_profile: "default"
+aws_instance_state: absent # present / absent
+
+aws_webserver_port: 8080
+
+agents_count_gpu0: 1
+agents_count_gpu1: 0
+agents_count_gpu2: 0
+agents_count_gpu3: 0
+agents_count_gpu4: 0
+
+aws_instance_count_agents: "{{ agents_count_gpu0|int + agents_count_gpu1|int + agents_count_gpu2|int + agents_count_gpu3|int + agents_count_gpu4|int }}"
+
+#################
+# CLEARML SERVER
+#################
+
+server_public_dns: example.local

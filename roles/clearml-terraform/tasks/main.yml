@@ -1,0 +1,9 @@
+---
+# tasks file for clearml-terraform
+
+
+- name: Provision terraform
+  import_tasks: provision.yml
+
+- name: Create resources
+  import_tasks: terraform-init.yml

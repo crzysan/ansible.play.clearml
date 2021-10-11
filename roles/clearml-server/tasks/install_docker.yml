@@ -32,15 +32,29 @@
     - docker-ce-cli
     - containerd.io
 
+- name: Increase vm.max_map_count for Elasticsearch in Docker
+  sysctl:
+    name: vm.max_map_count
+    value: '262144'
+    sysctl_file: /etc/sysctl.d/99-clearml.conf
+    reload: no
+  register: sysctlconfig
+
 - name: Start and enable Docker service
   service:
     name: docker
     state: started
     enabled: yes
 
+- name: Restart Docker service
+  service:
+    name: docker
+    state: restarted
+  when: sysctlconfig.changed
+
 - name: Download docker-compose
   get_url:
-    url: "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-{{ ansible_facts['os_family'] }}-{{ ansible_facts['ansible_machine'] }}"
+    url:  https://github.com/docker/compose/releases/download/1.29.2/docker-compose-{{ ansible_facts['system'] }}-{{ ansible_facts['machine'] }}
     dest: /usr/local/bin/docker-compose
     mode: '0755'
 

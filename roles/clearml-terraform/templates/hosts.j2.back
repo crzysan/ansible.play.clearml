@@ -1,0 +1,68 @@
+
+[clearml_servers]
+{{ vm_ip_server }}
+
+{# Initialise lists with empty value #}
+{% set agents_gpu0 = [] %}
+{% set agents_gpu1 = [] %}
+{% set agents_gpu2 = [] %}
+{% set agents_gpu3 = [] %}
+{% set agents_gpu4 = [] %}
+
+
+{% for agent_ip in vm_ips_agents %}
+
+  {% if loop.index <= agents_count_gpu0|int %}
+    {% agents_gpu0.append(agent_ip) %}
+
+  {% elif loop.index <= agents_count_gpu0|int +agents_count_gpu1|int %}
+    {% agents_gpu0.append(agent_ip) %}
+
+  {% elif loop.index <= agents_count_gpu0|int +agents_count_gpu1|int +agents_count_gpu2|int %}
+    {% agents_gpu0.append(agent_ip) %}
+
+  {% elif loop.index <= agents_count_gpu0|int +agents_count_gpu1|int +agents_count_gpu2|int +agents_count_gpu3|int }} %}
+    {% agents_gpu0.append(agent_ip) %}
+
+  {% else %}
+    {% agents_gpu0.append(agent_ip) %}
+
+  {% endif %}
+
+{% endfor %}
+
+
+[agents_gpu0]
+{% for agent_ip in agents_gpu0 %}
+{{ agent_ip }}
+{% endfor %}
+
+[agents_gpu1]
+{% for agent_ip in agents_gpu1 %}
+{{ agent_ip }}
+{% endfor %}
+
+[agents_gpu2]
+{% for agent_ip in agents_gpu2 %}
+{{ agent_ip }}
+{% endfor %}
+
+[agents_gpu3]
+{% for agent_ip in agents_gpu3 %}
+{{ agent_ip }}
+{% endfor %}
+
+[agents_gpu4]
+{% for agent_ip in agents_gpu4 %}
+{{ agent_ip }}
+{% endfor %}
+
+
+
+[clearml-agents:children]
+agents_gpu0
+agents_gpu1
+agents_gpu2
+agents_gpu3
+agents_gpu4
+

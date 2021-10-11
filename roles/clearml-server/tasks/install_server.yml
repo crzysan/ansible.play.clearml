@@ -1,8 +1,8 @@
 ---
-- name: Upgrade all packages to the latest version
+- name: Update all packages to their latest version
   apt:
-    name: "*"
-    state: latest
+    update_cache: yes
+    upgrade: dist
 
 - name: Install python on Ubuntu and family
   apt:
@@ -30,24 +30,26 @@
     - /opt/clearml/config
     - /opt/clearml/data/fileserver
 
+- name: Change app directory ownership recursive
+  file:
+    dest: /opt/clearml
+    owner: 1000
+    group: 1000
+    mode: 0775
+    recurse: yes
+
 # src directory path starts at the parent playbook directory!!
-- name: Synchronization of src on the control machine to dest on the remote hosts
-  synchronize:
-    src: docker-compose/docker-compose.yml
+- name: Create docker-compose file
+  template:
+    src: docker-compose.yml.j2
     dest: /opt/clearml/docker-compose.yml
-
-
-
-- name: Increase vm.max_map_count for Elasticsearch in Docker
-  command: |
-    echo "vm.max_map_count=262144" > /tmp/99-clearml.conf
-    mv /tmp/99-clearml.conf /etc/sysctl.d/99-clearml.conf
-    sysctl -w vm.max_map_count=262144
-    service docker restart
-
+    owner: "{{ clearml_user }}"
+    owner: "{{ clearml_user }}"
+    mode: 0644
+  register: dockercompose
 
 ## Create service file for clearml server
-- name: Create service file for clearml-agent
+- name: Create service file for clearml-server
   template:
     src: "{{ clearml_service }}.service.j2"
     dest: "/lib/systemd/system/{{ clearml_service }}.service"
@@ -56,13 +58,18 @@
     mode: 0644
   register: clearmlservice
 
+- name: Make sure server starts and enabled
+  debug:
+    msg: "Server is starting ans will be available at https://{{ server_public_dns }}"
+  notify:
+    - start service
 
 ## Restart clearml-agent service when config or service update
-- name: Restart clearml-service agent
+- name: Restart clearml-service server
   debug:
     msg: Performing restart!!!
   notify:
     - reload service
-    - restart clearml
-  when: clearmlconfig.changed or clearmlservice.changed
+    - restart service
+  when: clearmlservice.changed or dockercompose.changed
 

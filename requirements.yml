@@ -1,5 +1,0 @@
----
-- src: https://github.com/crzysan/ansible.role.clearml.git
-  scm: git
-  version: master
-  name: clearml

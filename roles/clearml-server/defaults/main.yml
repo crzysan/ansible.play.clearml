@@ -10,7 +10,7 @@ openssl_country: BE
 openssl_state: Antwerp
 openssl_loc: Antwerp
 openssl_org: Ovizio
-openssl_cn: example.local
+openssl_cn: "{{ server_public_dns }}"
 openssl_subject: "/C={{ openssl_country }}/ST={{ openssl_state }}/L={{ openssl_loc }}/O={{ openssl_org }}/CN={{ openssl_cn }}"
 your_domain: "{{ openssl_cn }}"
 nginx_access_log: /var/log/nginx/clearml.access.log
