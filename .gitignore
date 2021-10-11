@@ -21,24 +21,24 @@ vbox_host.cfg
 ##############
 # vault      #
 ##############
-/inventory/group_vars/all/vault.yml
-/pass
-/.vault-pass
+inventory/group_vars/all/vault.yml
+pass
+.vault-pass
 
 ##############
 # inventory  #
 ##############
-/inventory/group_vars/clearml_servers
-/inventory/group_vars/clearml_agents
-/inventory/hosts
+inventory/group_vars/clearml_servers
+inventory/group_vars/clearml_agents
+inventory/hosts
 
 ##############
 # terraform  #
 ##############
-/terraform/.terraform
-/terraform/terraform.tfvars
-/terraform/terraform.tfstate
-/terraform/terraform.tfstate.backup
+terraform/.terraform
+terraform/terraform.tfvars
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
 
 ###############
 # visual code #
