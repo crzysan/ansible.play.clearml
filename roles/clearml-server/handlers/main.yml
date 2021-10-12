@@ -7,16 +7,16 @@
 
 - name: start service
   systemd:
-    name: "{{ clearml_service }}".service
+    name: "{{ clearml_service }}.service"
     state: started
     enabled: yes
 
 - name: stop service
   systemd:
-    name: "{{ clearml_service }}".service
+    name: "{{ clearml_service }}.service"
     state: stopped
 
 - name: restart service
   systemd:
-    name: "{{ clearml_service }}".service
+    name: "{{ clearml_service }}.service"
     state: restarted
